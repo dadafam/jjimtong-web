@@ -33,6 +33,12 @@ a{color:inherit;text-decoration:none}
 /* ============ nav ============ */
 nav{position:sticky;top:0;z-index:80;background:rgba(255,246,238,.78);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.navlinks{display:flex;gap:30px;font-size:15px;font-weight:600;color:var(--muted)}
+.navlinks a{position:relative;padding:4px 0;transition:color .16s ease}
+.navlinks a:hover{color:var(--primary)}
+.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;border-radius:2px;
+  background:var(--primary);transition:right .22s cubic-bezier(.2,.8,.2,1)}
+.navlinks a:hover::after{right:0}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em}
 .brand img{width:34px;height:34px;border-radius:10px;box-shadow:var(--sh-s)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 26px;border-radius:999px;
@@ -61,6 +67,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);border:1px solid var(--line-2);
   color:var(--strong);padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:700;margin-bottom:24px;box-shadow:var(--sh-s)}
 .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--primary)}
+[id]{scroll-margin-top:90px}
 h1{font-size:clamp(36px,4.6vw,60px);line-height:1.18;letter-spacing:-.04em;font-weight:800;margin:0 0 22px;color:var(--ink-strong)}
 .grad{background:linear-gradient(100deg,var(--primary-2),var(--primary) 55%,var(--strong));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lede{font-size:clamp(16.5px,1.6vw,19px);color:var(--muted);margin:0 0 34px;max-width:460px}
@@ -97,7 +104,8 @@ h1{font-size:clamp(36px,4.6vw,60px);line-height:1.18;letter-spacing:-.04em;font-
 .sa i{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;margin:0 auto 6px;
   background:var(--alt);box-shadow:inset 0 0 0 1px rgba(74,43,28,.06);position:relative;overflow:hidden}
 .sa i img{width:24px;height:24px;object-fit:contain}
-.sa i.kakao{background:#FEE500}
+.sa i.kakao{background:none;box-shadow:none}
+.sa i.kakao img{width:100%;height:100%;border-radius:14px}
 .sa.on i{padding:0;box-shadow:0 6px 16px -6px rgba(222,73,19,.7)}
 .sa.on i img{width:100%;height:100%;border-radius:14px}
 .sa.on{color:var(--strong);font-weight:800}
@@ -152,6 +160,11 @@ h2{font-size:clamp(27px,3.4vw,40px);line-height:1.3;letter-spacing:-.035em;font-
 
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
+.reveal .card,.reveal .plan{opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in .card,.reveal.in .plan{opacity:1;transform:none}
+.reveal.in .card:nth-child(2),.reveal.in .plan:nth-child(2){transition-delay:.09s}
+.reveal.in .card:nth-child(3){transition-delay:.18s}
 
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px 28px;box-shadow:var(--sh-m);
@@ -162,9 +175,9 @@ h2{font-size:clamp(27px,3.4vw,40px);line-height:1.3;letter-spacing:-.035em;font-
 .ico{width:50px;height:50px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
   background:var(--chip);box-shadow:inset 0 0 0 1px rgba(74,43,28,.05)}
 .ico img{width:26px;height:26px;object-fit:contain}
-.ico.kakao{background:#FEE500}
+.ico.kakao{background:none;box-shadow:none}
+.ico.kakao img{width:100%;height:100%;border-radius:15px}
 .ico.insta{background:linear-gradient(135deg,#FEE9D6,#FBD9E4 55%,#E7DAF6)}
-.ico.google{background:#EAF1FE}
 
 /* 단계 뱃지 — 그라데이션 타일 + 얇은 외곽 링 */
 .num{position:relative;width:50px;height:50px;border-radius:17px;margin-bottom:22px;
@@ -184,9 +197,9 @@ h2{font-size:clamp(27px,3.4vw,40px);line-height:1.3;letter-spacing:-.035em;font-
 .note b{color:var(--ink);font-weight:700}
 .note .k{width:26px;height:26px;border-radius:9px;background:var(--alt);display:flex;align-items:center;justify-content:center;flex:none}
 .note .k img{width:16px;height:16px;object-fit:contain}
-.note .k.kakao{background:#FEE500}
+.note .k.kakao{background:none}
+.note .k.kakao img{width:100%;height:100%;border-radius:8px}
 .note .k.insta{background:linear-gradient(135deg,#FEE9D6,#FBD9E4 55%,#E7DAF6)}
-.note .k.google{background:#EAF1FE}
 .pill img{width:19px;height:19px;object-fit:contain;flex:none}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-11px) rotate(var(--r))}}
 .n1{--r:-6deg;left:2%;top:12px;animation-delay:0s}
@@ -196,11 +209,18 @@ h2{font-size:clamp(27px,3.4vw,40px);line-height:1.3;letter-spacing:-.035em;font-
 .n5{--r:-8deg;left:16%;top:168px;animation-delay:2.8s}
 
 /* platform marquee */
-.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.marq-in{display:flex;gap:14px;width:max-content;animation:slide 26s linear infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marq + .marq{margin-top:12px}
+.marq-in{display:flex;gap:12px;width:max-content;animation:slide 42s linear infinite}
+.marq.rev .marq-in{animation-duration:52s;animation-direction:reverse}
+.marq:hover .marq-in{animation-play-state:paused}
 .pill{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:999px;
-  padding:11px 20px;font-size:14.5px;font-weight:700;color:var(--muted);box-shadow:var(--sh-s);white-space:nowrap}
+  padding:10px 18px;font-size:14.5px;font-weight:700;color:var(--muted);box-shadow:var(--sh-s);white-space:nowrap}
+.pill.ghost{background:var(--chip);border-color:transparent;color:var(--strong)}
 @keyframes slide{to{transform:translateX(-50%)}}
+.marq-cap{text-align:center;font-size:14.5px;color:var(--sub);margin:0 0 20px}
+.marq-cap b{color:var(--ink);font-weight:700}
 
 /* ============ pricing ============ */
 .plans{display:grid;grid-template-columns:1fr 1.12fr;gap:22px;align-items:stretch}
@@ -266,6 +286,8 @@ h2{font-size:clamp(27px,3.4vw,40px);line-height:1.3;letter-spacing:-.035em;font-
 footer{border-top:1px solid var(--line);padding:46px 0 64px;font-size:14.5px;color:var(--sub)}
 footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 footer a{color:var(--muted);margin-right:22px}
+.foot-brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16.5px;color:var(--ink);margin-bottom:14px;letter-spacing:-.02em}
+.foot-brand img{width:28px;height:28px;border-radius:8px}
 footer a:hover{color:var(--primary);text-decoration:underline}
 .biz{font-size:13px;color:var(--faint);line-height:1.85;text-align:right}
 
@@ -282,12 +304,12 @@ footer a:hover{color:var(--primary);text-decoration:underline}
   .qr{display:none}
   .dock{display:block}
   body{padding-bottom:84px}
-  nav .btn{display:none}
+  nav .btn,.navlinks{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .scene{opacity:1;position:relative;inset:auto}
-  .reveal{opacity:1;transform:none}
+  .reveal,.reveal .card,.reveal .plan{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -296,6 +318,11 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 <nav>
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/icon.png" alt="">찜통</a>
+    <div class="navlinks">
+      <a href="#how">어떻게 쓰나요</a>
+      <a href="#pricing">요금제</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
     <a class="btn btn-primary btn-sm" href="#download">앱 받기</a>
   </div>
 </nav>
@@ -378,20 +405,43 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 
 <section style="padding-top:26px;padding-bottom:56px">
   <div class="wrap reveal">
+    <p class="marq-cap"><b>어디서 봤든 상관없어요.</b> 공유 버튼만 누르면 찜통으로 들어옵니다.</p>
     <div class="marq">
       <div class="marq-in">
         <span class="pill"><img src="assets/brand/youtube.svg" alt="">YouTube</span>
         <span class="pill"><img src="assets/brand/instagram.svg" alt="">Instagram</span>
         <span class="pill"><img src="assets/brand/tiktok.svg" alt="">TikTok</span>
-        <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 블로그</span>
-        <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 지도</span>
-        <span class="pill"><img src="assets/brand/chrome.svg" alt="">웹페이지</span>
+        <span class="pill"><img src="assets/brand/x.svg" alt="">X (트위터)</span>
+        <span class="pill"><img src="assets/brand/facebook.svg" alt="">Facebook</span>
+        <span class="pill"><img src="assets/brand/threads.svg" alt="">Threads</span>
+        <span class="pill"><img src="assets/brand/twitch.svg" alt="">Twitch</span>
+        <span class="pill"><img src="assets/brand/pinterest.svg" alt="">Pinterest</span>
         <span class="pill"><img src="assets/brand/youtube.svg" alt="">YouTube</span>
         <span class="pill"><img src="assets/brand/instagram.svg" alt="">Instagram</span>
         <span class="pill"><img src="assets/brand/tiktok.svg" alt="">TikTok</span>
+        <span class="pill"><img src="assets/brand/x.svg" alt="">X (트위터)</span>
+        <span class="pill"><img src="assets/brand/facebook.svg" alt="">Facebook</span>
+        <span class="pill"><img src="assets/brand/threads.svg" alt="">Threads</span>
+        <span class="pill"><img src="assets/brand/twitch.svg" alt="">Twitch</span>
+        <span class="pill"><img src="assets/brand/pinterest.svg" alt="">Pinterest</span>
+      </div>
+    </div>
+    <div class="marq rev">
+      <div class="marq-in">
         <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 블로그</span>
+        <span class="pill"><img src="assets/brand/tistory.svg" alt="">티스토리</span>
+        <span class="pill"><img src="assets/brand/velog.svg" alt="">velog</span>
+        <span class="pill"><img src="assets/brand/medium.svg" alt="">Medium</span>
         <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 지도</span>
-        <span class="pill"><img src="assets/brand/chrome.svg" alt="">웹페이지</span>
+        <span class="pill"><img src="assets/brand/globe.svg" alt="">뉴스 기사</span>
+        <span class="pill ghost"><img src="assets/brand/globe.svg" alt="">그 외 모든 링크</span>
+        <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 블로그</span>
+        <span class="pill"><img src="assets/brand/tistory.svg" alt="">티스토리</span>
+        <span class="pill"><img src="assets/brand/velog.svg" alt="">velog</span>
+        <span class="pill"><img src="assets/brand/medium.svg" alt="">Medium</span>
+        <span class="pill"><img src="assets/brand/naver.svg" alt="">네이버 지도</span>
+        <span class="pill"><img src="assets/brand/globe.svg" alt="">뉴스 기사</span>
+        <span class="pill ghost"><img src="assets/brand/globe.svg" alt="">그 외 모든 링크</span>
       </div>
     </div>
   </div>
@@ -408,21 +458,21 @@ footer a:hover{color:var(--primary);text-decoration:underline}
       <div class="note n1"><span class="k kakao"><img src="assets/brand/kakaotalk.svg" alt=""></span><b>나와의 채팅방</b> · 링크 47개</div>
       <div class="note n2"><span class="k"><img src="assets/brand/memo.svg" alt=""></span><b>메모장</b> · url만 잔뜩</div>
       <div class="note n3"><span class="k insta"><img src="assets/brand/instagram.svg" alt=""></span><b>인스타 저장함</b> · 스크롤 지옥</div>
-      <div class="note n4"><span class="k"><img src="assets/brand/chrome.svg" alt=""></span><b>브라우저 즐겨찾기</b></div>
-      <div class="note n5"><span class="k google"><img src="assets/brand/google.svg" alt=""></span>결국 <b>다시 검색</b></div>
+      <div class="note n4"><span class="k"><img src="assets/brand/bookmark.svg" alt=""></span><b>브라우저 즐겨찾기</b></div>
+      <div class="note n5"><span class="k"><img src="assets/brand/search.svg" alt=""></span>결국 <b>다시 검색</b></div>
     </div>
 
     <div class="g3 reveal" style="margin-top:34px">
       <div class="card"><div class="ico kakao"><img src="assets/brand/kakaotalk.svg" alt="카카오톡"></div><h3>일단 나에게 공유하기</h3><p>"나중에 봐야지" 하고 나와의 채팅방에 툭. 그게 마지막이었습니다.</p></div>
       <div class="card"><div class="ico insta"><img src="assets/brand/instagram.svg" alt="인스타그램"></div><h3>어디 뒀는지 모르겠고</h3><p>카톡, 메모장, 인스타 저장함에 제각각. 스크롤하다 지쳐 포기합니다.</p></div>
-      <div class="card"><div class="ico google"><img src="assets/brand/google.svg" alt="구글 검색"></div><h3>결국 처음부터 다시 검색</h3><p>저장했다는 것만 기억나고, 정작 그 링크는 끝내 못 찾습니다.</p></div>
+      <div class="card"><div class="ico"><img src="assets/brand/search.svg" alt=""></div><h3>결국 처음부터 다시 검색</h3><p>저장했다는 것만 기억나고, 정작 그 링크는 끝내 못 찾습니다.</p></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head reveal" id="how">
       <p class="kicker">찜통은 이렇게</p>
       <h2>던져두면, 알아서 정리됩니다</h2>
       <p class="sub">저장하는 수고는 없애고, 찾는 일은 AI에게 맡기세요.</p>
@@ -437,7 +487,7 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 
 <section class="band">
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head reveal" id="pricing">
       <p class="kicker">요금제</p>
       <h2>기본은 무료.<br>더 깊게 쓸 때만 Pro</h2>
       <p class="sub">저장과 자동 정리는 무료로 충분히. Pro는 쌓인 걸 제대로 꺼내 쓰고 싶을 때.</p>
@@ -479,7 +529,7 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 
 <section>
   <div class="wrap">
-    <div class="head reveal">
+    <div class="head reveal" id="faq">
       <p class="kicker">자주 묻는 질문</p>
       <h2>궁금한 것부터 짚고 갈게요</h2>
     </div>
@@ -514,8 +564,8 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 
 <div class="wrap">
   <div class="final reveal">
-    <h2>찜해둔 것들이,<br>드디어 쓸모 있어집니다</h2>
-    <p>저장까지는 누구나 합니다. 찜통은 다시 꺼내 쓰는 것까지 해요.</p>
+    <h2>오늘 본 그 영상부터,<br>찜통에.</h2>
+    <p>공유 버튼 한 번이면 됩니다.</p>
     <div class="cta-row">
       <a class="btn btn-white btn-store" href="https://apps.apple.com/app/id6776133462">
         <svg viewBox="0 0 384 512" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
@@ -529,6 +579,7 @@ footer a:hover{color:var(--primary);text-decoration:underline}
 <footer>
   <div class="wrap">
     <div>
+      <div class="foot-brand"><img src="assets/icon.png" alt="">찜통</div>
       <a href="https://dadafam.github.io/ahchive-legal/support.html">문의·지원</a>
       <a href="https://dadafam.github.io/ahchive-legal/">개인정보처리방침</a>
       <a href="https://dadafam.github.io/ahchive-legal/delete.html">계정·데이터 삭제</a>
