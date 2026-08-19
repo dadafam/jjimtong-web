@@ -310,77 +310,85 @@ footer a:hover{color:var(--primary);text-decoration:underline}
   nav .btn,.navlinks{display:none}
 }
 @media (max-width:600px){
-  /* ===== 모바일 전용 재설계 =====
-     원칙: 글자는 키우고(본문 16px 기준), 여백은 줄이고, 가로 폭을 쓴다.
-     이전 버전은 높이를 줄이려고 본문을 14.8px까지 낮췄는데 읽기 어렵고 정돈돼 보이지 않았다.
-     높이는 폰트가 아니라 '레이아웃'에서 줄인다 — 아이콘을 텍스트 위가 아니라 왼쪽에 둔다. */
+  /* ===== 모바일 재설계 v3 =====
+     livehouse.kr 의 모바일 CSS를 실측해 기준을 잡았다(h1 38px/lh1.04, h2 27px,
+     히어로 본문 22px/lh1.36, 섹션 padding 48px, 그리고 전부 좌측 정렬).
 
-  .wrap{padding:0 18px}
-  section{padding:40px 0}
-  .head{margin-bottom:22px}
-  .hero{padding:26px 0 16px}
-  .hero .wrap{gap:22px}
+     앞선 두 번의 시도가 틀린 이유:
+     (1) 정렬을 의심하지 않았다. 중앙 정렬은 줄을 짧게 끊어 "PC 페이지를 축소한 것"처럼
+         보이게 한다. 모바일에서는 좌측 정렬 + 전체 폭이 훨씬 크고 정돈돼 읽힌다.
+     (2) 절대 크기가 작았다. 히어로 본문 17px vs 22px 는 체감 차이가 크다.
+     (3) 요금제 가로 스크롤은 역효과였다 — 카드가 길어서 스크롤 중간에 양쪽이 잘리며
+         단어가 절단돼 버그로 읽혔다. 세로 스택으로 되돌린다. */
 
-  /* ---- 타이포: 모바일 본문 하한 16px ---- */
-  h1{font-size:clamp(26px,8vw,34px);letter-spacing:-.045em;margin-bottom:15px}
-  h2{font-size:clamp(23px,6.6vw,29px)}
-  .kicker{font-size:12.5px;margin-bottom:10px}
-  .eyebrow{margin-bottom:15px;font-size:12.5px;padding:7px 14px}
-  .lede{font-size:17px;line-height:1.58;margin-bottom:22px;max-width:none}
-  .lede br{display:none}
-  .sub{font-size:16px;margin-top:12px;line-height:1.6}
-  .hero-note{margin-top:13px;font-size:14px;line-height:1.55}
+  .wrap{padding:0 20px}
+  section{padding:48px 0}
 
-  /* ---- 스토어 버튼: 세로 스택 + 전체 폭 ---- */
+  /* ---- 좌측 정렬로 전환 (이게 핵심) ---- */
+  .head{text-align:left;margin-bottom:26px}
+  .hero .wrap{text-align:left;gap:26px}
+  .lede{margin-left:0;margin-right:0;max-width:none}
+  .sub{margin:14px 0 0;max-width:none}
+  .cta-row{justify-content:flex-start}
+  .final{text-align:left}
+
+  .hero{padding:30px 0 18px}
+
+  /* ---- 타이포: livehouse 기준에 맞춰 확대 ---- */
+  h1{font-size:clamp(30px,9.3vw,38px);line-height:1.1;letter-spacing:-.045em;margin-bottom:16px}
+  h2{font-size:clamp(24px,7.2vw,30px);line-height:1.22}
+  .kicker{font-size:13px;margin-bottom:12px;letter-spacing:.06em}
+  .eyebrow{margin-bottom:18px;font-size:13px;padding:8px 15px}
+  .lede{font-size:19px;line-height:1.5;margin-bottom:24px}
+  .sub{font-size:17px;line-height:1.6}
+  .hero-note{margin-top:16px;font-size:14.5px;line-height:1.55}
+
+  /* ---- 스토어 버튼 ---- */
   .cta-row{flex-direction:column;align-items:stretch;gap:10px}
   .cta-row .btn{width:100%;justify-content:center}
 
-  /* ---- 카드: 아이콘/번호를 왼쪽 열로. 카드 높이가 약 40% 줄어든다 ---- */
-  .g3{gap:10px}
-  .card{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:start;
-    padding:20px 18px;border-radius:18px}
-  .card>.ico,.card>.num{grid-row:1 / span 2;margin-bottom:0;width:44px;height:44px;border-radius:14px}
-  .card>.num{border-radius:15px}
-  .card .num b{font-size:19px}
-  .card .ico img{width:23px;height:23px}
-  .card h3{grid-column:2;margin:1px 0 5px;font-size:18px}
-  .card p{grid-column:2;font-size:16px;line-height:1.58}
+  /* ---- 카드: 아이콘 왼쪽 + 장식 덜어내기 ----
+     흰 카드에 테두리·큰 그림자를 겹치면 화면이 조각조각 나뉘어 산만해진다.
+     livehouse 는 카드 없이 납작한 배경 위에 타이포만 쓴다. 그 중간을 취한다. */
+  .g3{gap:12px}
+  .card{display:grid;grid-template-columns:auto 1fr;column-gap:15px;align-items:start;
+    padding:20px 18px;border-radius:16px;border-color:transparent;box-shadow:var(--sh-s)}
+  .card>.ico,.card>.num{grid-row:1 / span 2;margin-bottom:0;width:46px;height:46px;border-radius:15px}
+  .card .num b{font-size:20px}
+  .card .ico img{width:24px;height:24px}
+  .card h3{grid-column:2;margin:2px 0 6px;font-size:19px;line-height:1.3}
+  .card p{grid-column:2;font-size:16.5px;line-height:1.6}
   .card:hover{transform:none}
 
-  /* ---- 요금제: 좌우 스크롤(스냅). 두 카드를 쌓지 않아 높이가 절반이 된다 ---- */
-  .plans{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;
-    margin:0 -18px;padding:4px 18px 12px;
-    /* stretch를 끄지 않으면 무료 카드가 Pro 높이까지 늘어나 아래가 빈다 */
-    align-items:flex-start;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    scrollbar-width:none;-ms-overflow-style:none}
-  .plans::-webkit-scrollbar{display:none}
-  .plan{flex:0 0 83%;scroll-snap-align:center;padding:24px 20px;border-radius:20px}
-  .plan h3{font-size:18.5px}
-  .plan .desc{font-size:15px;margin-bottom:16px}
-  .amt{font-size:31px}
-  .amt small{font-size:14.5px}
-  .feat{margin-top:18px}
-  .feat li{font-size:15.5px;padding:8px 0;line-height:1.55}
+  /* ---- 요금제: 세로 스택으로 복귀 (가로 스크롤은 절단 때문에 폐기) ---- */
+  .plans{display:grid;grid-template-columns:1fr;gap:14px;overflow:visible;margin:0;padding:0}
+  .plan{padding:26px 22px;border-radius:20px}
+  .plan h3{font-size:20px}
+  .plan .desc{font-size:16px;margin-bottom:18px}
+  .amt{font-size:34px}
+  .amt small{font-size:15px}
+  .feat{margin-top:20px}
+  .feat li{font-size:16px;padding:9px 0;line-height:1.55}
 
   /* ---- FAQ ---- */
-  .faq details{margin-bottom:9px;border-radius:14px}
-  .faq summary{padding:16px 18px;font-size:16.5px}
-  .faq .a{padding:0 18px 18px;font-size:15.5px;line-height:1.62}
+  .faq details{margin-bottom:10px;border-radius:16px;border-color:transparent;box-shadow:var(--sh-s)}
+  .faq summary{padding:18px 20px;font-size:17.5px;line-height:1.35}
+  .faq .a{padding:0 20px 20px;font-size:16.5px;line-height:1.62}
 
   /* ---- 최종 CTA ---- */
-  .final{padding:38px 20px;margin-bottom:38px;border-radius:24px}
-  .final h2{margin-bottom:10px}
-  .final p{font-size:16px;margin-bottom:22px}
+  .final{padding:40px 22px;margin-bottom:42px;border-radius:24px}
+  .final h2{margin-bottom:12px}
+  .final p{font-size:17px;margin-bottom:24px}
+  .final .cta-row{justify-content:flex-start}
 
   /* ---- 배경 블롭 ---- */
   .blob.a{width:400px;height:400px;top:-190px;left:-120px}
   .blob.b{width:340px;height:340px;top:-80px;right:-130px}
 
-  footer{padding:26px 0 32px;font-size:15px}
-  .foot-brand{margin-bottom:10px}
-  footer a{margin-right:16px;display:inline-block;padding:4px 0}
-  .biz{margin-top:14px;font-size:13px}
+  footer{padding:30px 0 36px;font-size:15.5px}
+  .foot-brand{margin-bottom:12px}
+  footer a{margin-right:18px;display:inline-block;padding:5px 0}
+  .biz{margin-top:16px;font-size:13.5px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
